@@ -35,22 +35,8 @@ export function ApplicationHeader() {
     const telemetry = loadState.status === "ready" ? loadState.telemetry : null;
     const batteryIds = telemetry?.snapshot.batteryIds ?? [];
     const eventRows = loadState.status === "ready" ? loadState.batteryFleetData.eventRows : [];
-    const attentionCount = telemetry?.overviewSummary.attentionCount ?? 0;
 
-    let telemetryStatus = "Loading telemetry";
-    let telemetryStatusClassName = "bg-muted-foreground";
 
-    if (loadState.status === "error") {
-        telemetryStatus = "Telemetry unavailable";
-        telemetryStatusClassName = "bg-destructive";
-    } else if (loadState.status === "empty") {
-        telemetryStatus = "No telemetry records";
-    } else if (telemetry) {
-        const batteryCount = telemetry.snapshot.batteryCount;
-        const eventCount = telemetry.snapshot.eventCount.toLocaleString();
-        telemetryStatus = attentionCount > 0 ? `${batteryCount} batteries · ${attentionCount} need review · ${eventCount} events` : `${batteryCount} batteries monitored · ${eventCount} events`;
-        telemetryStatusClassName = attentionCount > 0 ? "bg-[var(--battery-status-low)]" : "bg-[var(--battery-status-normal)]";
-    }
 
     return (
         <header className="sticky top-0 z-40 border-b bg-background/95 backdrop-blur">
