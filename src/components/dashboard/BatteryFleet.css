@@ -1,0 +1,273 @@
+:root {
+  --fleet-device-border: var(--border);
+  --fleet-device-background:
+    linear-gradient(
+      106deg,
+      color-mix(in srgb, var(--background) 76%, transparent) 0%,
+      transparent 22%,
+      transparent 78%,
+      color-mix(in srgb, var(--background) 45%, transparent) 100%
+    ),
+    radial-gradient(
+      circle at 50% 24%,
+      var(--card) 0%,
+      color-mix(in srgb, var(--card) 72%, var(--muted)) 42%,
+      var(--muted) 100%
+    );
+  --fleet-device-ink: var(--foreground);
+  --fleet-device-copy: var(--foreground);
+  --fleet-device-divider: var(--border);
+  --fleet-action-background: linear-gradient(
+    100deg,
+    var(--card),
+    color-mix(in srgb, var(--card) 55%, var(--muted)) 60%,
+    var(--muted)
+  );
+  --fleet-action-background-hover: linear-gradient(
+    100deg,
+    var(--background),
+    color-mix(in srgb, var(--card) 72%, var(--muted)) 60%,
+    color-mix(in srgb, var(--muted) 88%, var(--background))
+  );
+  --fleet-action-text: var(--foreground);
+  --fleet-action-icon: var(--muted-foreground);
+  --fleet-action-shadow:
+    inset 0 1px 0 color-mix(in srgb, var(--background) 75%, transparent),
+    0 12px 32px color-mix(in srgb, var(--foreground) 12%, transparent);
+  --fleet-action-shadow-hover:
+    inset 0 1px 0 color-mix(in srgb, var(--background) 85%, transparent),
+    0 16px 35px color-mix(in srgb, var(--foreground) 16%, transparent);
+  --fleet-mark-highlight: var(--foreground);
+  --fleet-mark-mid: var(--muted-foreground);
+  --fleet-mark-end: var(--foreground);
+  --fleet-grain-dot: color-mix(in srgb, var(--foreground) 8%, transparent);
+  --fleet-grain-line: color-mix(in srgb, var(--foreground) 2%, transparent);
+  --fleet-tech-label-shadow: 0 0 8px color-mix(in srgb, var(--foreground) 14%, transparent);
+  --fleet-scale-color: var(--muted-foreground);
+  --fleet-scale-major: color-mix(in srgb, var(--foreground) 58%, var(--border));
+  --fleet-scale-minor: color-mix(in srgb, var(--foreground) 48%, var(--border));
+  --fleet-critical: var(--battery-status-critical);
+  --fleet-low: var(--battery-status-low);
+  --fleet-standard: var(--battery-status-normal);
+}
+
+.dark {
+  --fleet-device-border: var(--border);
+  --fleet-device-background:
+    linear-gradient(
+      106deg,
+      color-mix(in srgb, var(--foreground) 2.5%, transparent) 0%,
+      transparent 18%,
+      transparent 79%,
+      color-mix(in srgb, var(--foreground) 1.5%, transparent) 100%
+    ),
+    radial-gradient(
+      circle at 50% 25%,
+      var(--card) 0%,
+      color-mix(in srgb, var(--card) 62%, var(--background)) 38%,
+      var(--background) 100%
+    );
+  --fleet-device-ink: var(--foreground);
+  --fleet-device-copy: var(--muted-foreground);
+  --fleet-device-divider: var(--border);
+  --fleet-action-background: linear-gradient(
+    100deg,
+    var(--card),
+    color-mix(in srgb, var(--card) 60%, var(--background)) 60%,
+    var(--muted)
+  );
+  --fleet-action-background-hover: linear-gradient(
+    100deg,
+    color-mix(in srgb, var(--card) 84%, var(--foreground)),
+    var(--card) 60%,
+    color-mix(in srgb, var(--muted) 90%, var(--foreground))
+  );
+  --fleet-action-text: var(--muted-foreground);
+  --fleet-action-icon: var(--muted-foreground);
+  --fleet-action-shadow:
+    inset 0 1px 0 color-mix(in srgb, var(--foreground) 3%, transparent),
+    0 12px 32px color-mix(in srgb, var(--background) 22%, transparent);
+  --fleet-action-shadow-hover:
+    inset 0 1px 0 color-mix(in srgb, var(--foreground) 5%, transparent),
+    0 16px 35px color-mix(in srgb, var(--background) 30%, transparent);
+  --fleet-mark-highlight: var(--foreground);
+  --fleet-mark-mid: var(--muted-foreground);
+  --fleet-mark-end: var(--foreground);
+  --fleet-grain-dot: color-mix(in srgb, var(--foreground) 9%, transparent);
+  --fleet-grain-line: color-mix(in srgb, var(--foreground) 2%, transparent);
+  --fleet-tech-label-shadow: 0 0 8px color-mix(in srgb, var(--foreground) 14%, transparent);
+  --fleet-scale-color: var(--muted-foreground);
+  --fleet-scale-major: color-mix(in srgb, var(--foreground) 34%, var(--background));
+  --fleet-scale-minor: color-mix(in srgb, var(--foreground) 30%, var(--background));
+  --fleet-divider-line-start: color-mix(in srgb, var(--foreground) 12%, var(--background));
+  --fleet-divider-line-end: color-mix(in srgb, var(--foreground) 8%, var(--background));
+}
+
+.fleet-device-shell {
+  position: relative;
+  width: 100%;
+  max-width: 560px;
+  min-height: 880px;
+  overflow: hidden;
+  border: 2px solid var(--fleet-device-border);
+  border-radius: var(--dashboard-panel-radius);
+  background: var(--fleet-device-background);
+  box-shadow: none;
+  font-family: Arial, Helvetica, ui-sans-serif, system-ui, sans-serif;
+  isolation: isolate;
+  justify-self: center;
+}
+
+.fleet-device-shell::before {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  content: "";
+  pointer-events: none;
+  opacity: 0.18;
+  background-image:
+    repeating-radial-gradient(
+      circle at 24% 37%,
+      var(--fleet-grain-dot) 0 0.55px,
+      transparent 0.8px 3px
+    ),
+    repeating-linear-gradient(
+      105deg,
+      transparent 0 5px,
+      var(--fleet-grain-line) 6px,
+      transparent 7px 12px
+    );
+  mix-blend-mode: soft-light;
+}
+
+.fleet-tech-label {
+  font-family: "Lucida Console", "SFMono-Regular", Consolas, monospace;
+  letter-spacing: -0.05em;
+  text-transform: uppercase;
+  text-shadow: var(--fleet-tech-label-shadow);
+}
+
+.fleet-scale {
+  color: var(--fleet-scale-color);
+}
+
+.fleet-scale-major-tick {
+  background: var(--fleet-scale-major);
+}
+
+.fleet-scale-minor-tick {
+  background: var(--fleet-scale-minor);
+}
+
+.fleet-battery-card {
+  position: relative;
+  min-width: 0;
+  text-align: center;
+}
+
+.fleet-battery-card::after {
+  position: absolute;
+  right: 10%;
+  bottom: 38px;
+  left: 10%;
+  height: 2px;
+  content: "";
+  border-radius: 999px;
+  background: var(--fleet-status-color);
+  box-shadow: 0 0 9px color-mix(in srgb, var(--fleet-status-color) 45%, transparent);
+}
+
+.fleet-status-title {
+  color: var(--fleet-status-color);
+  font-family: "Lucida Console", "SFMono-Regular", Consolas, monospace;
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -0.07em;
+  text-transform: uppercase;
+}
+
+.fleet-battery-count {
+  margin-top: 1px;
+  color: var(--fleet-device-copy);
+  font-family: "Lucida Console", "SFMono-Regular", Consolas, monospace;
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: -0.07em;
+  text-transform: uppercase;
+}
+
+.fleet-action-button {
+  display: grid;
+  grid-template-columns: 57px 1fr 50px;
+  align-items: stretch;
+  width: 100%;
+  height: 64px;
+  overflow: hidden;
+  border: 0;
+  border-radius: 16px;
+  background: var(--fleet-action-background);
+  box-shadow: var(--fleet-action-shadow);
+  color: inherit;
+  cursor: pointer;
+  text-decoration: none;
+  transition: transform 180ms ease, background 180ms ease, box-shadow 180ms ease;
+}
+
+.fleet-action-button:hover {
+  transform: translateY(-2px);
+  background: var(--fleet-action-background-hover);
+  box-shadow: var(--fleet-action-shadow-hover);
+}
+
+.fleet-action-button:active {
+  transform: translateY(0);
+}
+
+.fleet-action-cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.fleet-action-cell + .fleet-action-cell {
+  border-left: 2px solid var(--fleet-device-divider);
+}
+
+.fleet-title {
+  color: var(--fleet-device-ink);
+}
+
+.fleet-action-label {
+  color: var(--fleet-action-text);
+}
+
+.fleet-action-icon,
+.fleet-action-arrow {
+  color: var(--fleet-action-icon);
+}
+
+@media (min-width: 1280px) {
+  .fleet-device-shell {
+    height: 100%;
+  }
+}
+
+@media (max-width: 680px) {
+  .fleet-device-shell {
+    min-height: 0;
+  }
+
+  .fleet-status-title {
+    font-size: clamp(14px, 4vw, 18px);
+  }
+
+  .fleet-battery-count {
+    font-size: clamp(12px, 3vw, 17px);
+  }
+
+  .fleet-action-button {
+    grid-template-columns: 48px 1fr 42px;
+    height: 60px;
+    border-radius: 14px;
+  }
+}

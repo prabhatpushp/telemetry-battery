@@ -1,0 +1,184 @@
+:root {
+  --power-foreground: var(--foreground);
+  --power-panel-base: var(--card);
+  --power-panel-sheen: color-mix(in oklab, var(--card) 86%, transparent);
+  --power-panel-depth: color-mix(in oklab, var(--foreground) 9%, transparent);
+  --power-panel-border: var(--border);
+  --power-panel-inner-border: color-mix(in oklab, var(--border) 76%, transparent);
+  --power-label: var(--foreground);
+  --power-label-soft: var(--muted-foreground);
+  --power-screw-light: var(--muted-foreground);
+  --power-screw-mid: color-mix(in oklab, var(--muted-foreground) 72%, var(--foreground));
+  --power-screw-dark: var(--foreground);
+  --power-screw-highlight: color-mix(in oklab, var(--card) 74%, transparent);
+  --power-screw-shadow: color-mix(in oklab, var(--foreground) 24%, transparent);
+  --power-dial-outer: var(--border);
+  --power-dial-mid: var(--muted);
+  --power-dial-face-a: var(--card);
+  --power-dial-face-b: var(--muted);
+  --power-dial-face-c: color-mix(in oklab, var(--muted) 82%, var(--muted-foreground));
+  --power-dial-line: var(--muted-foreground);
+  --power-dial-deep: color-mix(in oklab, var(--muted) 42%, var(--foreground));
+  --power-tick-minor: var(--muted-foreground);
+  --power-tick-major: var(--foreground);
+  --power-rail-inactive: var(--muted-foreground);
+  --power-charge-readout: var(--battery-status-charging);
+  --power-discharge-readout: var(--battery-status-discharging);
+  --power-net-readout: #587f18;
+  --power-text-shadow: color-mix(in oklab, var(--foreground) 18%, transparent);
+  --power-dial-shadow: var(--foreground);
+  --power-rail-highlight: var(--card);
+  --power-charge-readout-glow: rgb(73 242 111 / 58%);
+  --power-discharge-readout-glow: rgb(255 174 22 / 58%);
+  --power-charge-flow-a: #38df79;
+  --power-charge-flow-b: #43e986;
+  --power-charge-flow-c: #53ef91;
+  --power-discharge-flow-a: #f39b09;
+  --power-discharge-flow-b: #ffa912;
+  --power-discharge-flow-c: #ffb526;
+  --power-charge-haze-a: #20c969;
+  --power-charge-haze-b: #2ddf76;
+  --power-charge-haze-c: #43ef8a;
+  --power-charge-haze-d: #52f198;
+  --power-discharge-haze-a: #e58d00;
+  --power-discharge-haze-b: #ef9904;
+  --power-discharge-haze-c: #ffac12;
+  --power-discharge-haze-d: #ffbb32;
+  --power-charge-rail-a: #31d96d;
+  --power-charge-rail-b: #48f486;
+  --power-charge-rail-c: #35e676;
+  --power-charge-rail-d: #24bd5b;
+  --power-charge-rail-color: var(--battery-status-charging);
+  --power-discharge-rail-a: #ed9809;
+  --power-discharge-rail-b: #ffba22;
+  --power-discharge-rail-c: #ffab10;
+  --power-discharge-rail-d: #d88908;
+  --power-discharge-rail-color: var(--battery-status-discharging);
+}
+
+.dark {
+  --power-foreground: #dadbd8;
+  --power-panel-base: #111212;
+  --power-panel-sheen: rgb(49 52 51 / 33%);
+  --power-panel-depth: rgb(0 0 0 / 32%);
+  --power-panel-border: #292b2b;
+  --power-panel-inner-border: rgb(255 255 255 / 3%);
+  --power-label: #a2a4a2;
+  --power-label-soft: #a8aaa7;
+  --power-screw-light: #4a4c4c;
+  --power-screw-mid: #343636;
+  --power-screw-dark: #080909;
+  --power-screw-highlight: rgb(255 255 255 / 24%);
+  --power-screw-shadow: rgb(0 0 0 / 70%);
+  --power-dial-outer: #080909;
+  --power-dial-mid: #0c0d0d;
+  --power-dial-face-a: #252726;
+  --power-dial-face-b: #171818;
+  --power-dial-face-c: #090a0a;
+  --power-dial-line: #5e615f;
+  --power-dial-deep: #050606;
+  --power-tick-minor: #3c3f3d;
+  --power-tick-major: #575a58;
+  --power-rail-inactive: #484c4a;
+  --power-net-readout: #b4ec5e;
+  --power-text-shadow: rgb(0 0 0 / 35%);
+  --power-dial-shadow: #000000;
+  --power-rail-highlight: #ffffff;
+}
+
+.power-instrument-panel {
+  position: relative;
+  width: 100%;
+  max-width: 1200px;
+  overflow: hidden;
+  isolation: isolate;
+  aspect-ratio: 2.015 / 1;
+  border: 2px solid var(--power-panel-border);
+  border-radius: var(--dashboard-panel-radius);
+  background:
+    radial-gradient(ellipse at 50% 42%, var(--power-panel-sheen), transparent 43%),
+    linear-gradient(110deg, var(--power-panel-depth), transparent 20% 80%, var(--power-panel-depth)),
+    var(--power-panel-base);
+  box-shadow: none;
+  color: var(--power-foreground);
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+.power-instrument-panel::before {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  content: "";
+  border-radius: inherit;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.95' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.28'/%3E%3C/svg%3E");
+  opacity: 0.24;
+  mix-blend-mode: soft-light;
+  pointer-events: none;
+}
+
+.power-instrument-panel::after {
+  position: absolute;
+  z-index: 20;
+  inset: 4px;
+  content: "";
+  border: 1px solid var(--power-panel-inner-border);
+  border-radius: calc(1.25rem + 0.55rem);
+  pointer-events: none;
+}
+
+.power-screw {
+  position: absolute;
+  z-index: 30;
+  width: clamp(21px, 3.25%, 40px);
+  aspect-ratio: 1;
+  border: 1px solid var(--power-screw-dark);
+  border-radius: 999px;
+  background:
+    radial-gradient(circle at 37% 29%, var(--power-screw-light) 0 5%, transparent 6%),
+    radial-gradient(circle, var(--power-screw-mid) 0 37%, var(--power-screw-dark) 39% 54%, var(--power-screw-light) 57% 62%, var(--power-screw-dark) 65% 100%);
+  box-shadow: inset 0 1px 2px var(--power-screw-highlight), 0 1px 3px var(--power-screw-shadow);
+}
+
+.power-screw::after {
+  position: absolute;
+  top: 46%;
+  left: 24%;
+  width: 52%;
+  height: 9%;
+  content: "";
+  border-radius: 999px;
+  background: linear-gradient(var(--power-screw-dark), var(--power-screw-light) 47%, var(--power-screw-dark) 53%);
+  box-shadow: 0 1px 0 color-mix(in oklab, var(--power-screw-light) 25%, transparent);
+  transform: rotate(46deg);
+}
+
+.power-liquid-flow-glow,
+.power-liquid-flow-core,
+.power-flow-indicator {
+  fill: none;
+  stroke-linecap: round;
+  vector-effect: non-scaling-stroke;
+  transition: opacity 180ms linear, stroke-width 180ms linear;
+}
+
+.power-flow-indicator {
+  stroke-dasharray: 5 95;
+  animation: power-flow-indicator-run var(--power-indicator-speed, 4.2s) linear infinite;
+  animation-delay: var(--power-indicator-delay, 0s);
+}
+
+.power-rail-glow {
+  opacity: 1;
+}
+
+.power-energy-haze {
+  transform-box: fill-box;
+  transform-origin: center;
+  transition: opacity 200ms linear;
+}
+
+@keyframes power-flow-indicator-run {
+  to {
+    stroke-dashoffset: var(--power-indicator-travel, -100);
+  }
+}

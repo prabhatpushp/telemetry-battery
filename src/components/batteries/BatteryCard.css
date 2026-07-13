@@ -1,0 +1,30 @@
+.battery-grid-card {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 295px;
+}
+
+.battery-grid-visual {
+  background: color-mix(in oklch, var(--muted) 54%, transparent);
+}
+
+.battery-grid-status {
+  --battery-status-dot: var(--muted-foreground);
+}
+
+.battery-grid-status::before {
+  width: 0.45rem;
+  height: 0.45rem;
+  border-radius: 999px;
+  background: var(--battery-status-dot);
+  content: "";
+}
+
+.battery-grid-status[data-status="charging"] {
+  --battery-status-dot: var(--battery-status-charging);
+  color: var(--battery-status-charging);
+}
+
+.battery-grid-status[data-status="discharging"] {
+  --battery-status-dot: var(--battery-status-discharging);
+  color: var(--battery-status-discharging);
+}
